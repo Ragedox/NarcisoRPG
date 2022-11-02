@@ -1,0 +1,224 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://Narciso.gd" type="Script" id=2]
+[ext_resource path="res://Player.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 8 )
+
+[sub_resource type="Animation" id=28]
+resource_name = "Back_Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "Back_Walk"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "Front_Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "Front_Walk"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=16]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 8 ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "Side_Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "Side_Walk"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 8, 9 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=31]
+animation = "Front_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=32]
+animation = "Back_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "Side_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=34]
+animation = "Side_Idle"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=27]
+blend_point_0/node = SubResource( 31 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 32 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 33 )
+blend_point_2/pos = Vector2( -1, 0 )
+blend_point_3/node = SubResource( 34 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=35]
+animation = "Front_Walk"
+
+[sub_resource type="AnimationNodeAnimation" id=36]
+animation = "Back_Walk"
+
+[sub_resource type="AnimationNodeAnimation" id=37]
+animation = "Side_Walk"
+
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "Side_Walk"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=39]
+blend_point_0/node = SubResource( 35 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 36 )
+blend_point_1/pos = Vector2( 0, -0.9 )
+blend_point_2/node = SubResource( 37 )
+blend_point_2/pos = Vector2( -1, 0 )
+blend_point_3/node = SubResource( 38 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+
+[sub_resource type="AnimationNodeStateMachine" id=25]
+states/Idle/node = SubResource( 27 )
+states/Idle/position = Vector2( 410, 105 )
+states/Walk/node = SubResource( 39 )
+states/Walk/position = Vector2( 639, 105 )
+transitions = [ "Idle", "Walk", SubResource( 40 ), "Walk", "Idle", SubResource( 41 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=26]
+
+[node name="Narciso" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 6 )
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -1 )
+texture = ExtResource( 5 )
+hframes = 10
+frame = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Back_Idle = SubResource( 28 )
+anims/Back_Walk = SubResource( 19 )
+anims/Front_Idle = SubResource( 29 )
+anims/Front_Walk = SubResource( 18 )
+anims/RESET = SubResource( 16 )
+anims/Side_Idle = SubResource( 30 )
+anims/Side_Walk = SubResource( 17 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 25 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 26 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Walk/blend_position = Vector2( 0, 0 )
+
+[node name="Reflection" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.498039 )
+position = Vector2( -1, 22 )
+rotation = -3.14159
+z_index = -1
+texture = ExtResource( 5 )
+hframes = 10
+frame = 5
